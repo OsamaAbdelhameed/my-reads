@@ -17,7 +17,7 @@ function App() {
     getBooks();
   }, []);
 
-  console.log(allBooks);
+  // console.log(allBooks);
 
   return (
     <div className="app">

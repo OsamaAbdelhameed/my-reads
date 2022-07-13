@@ -23,7 +23,7 @@ const MyReads = ({ allBooks, setAllBooks }) => {
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
                         <ol className="books-grid">
-                            {current.map((b, k) => <ShowBook key={k} b={b} allBooks={allBooks} setAllBooks={setAllBooks} />)}
+                            {current.map((b, k) => <ShowBook key={k} b={b} title={b.title} author={(b.authors) ? b.authors[0] : 'No Author'} imageBG={(b.imageLinks && b.imageLinks.thumbnail) ? b.imageLinks.thumbnail : ''} allBooks={allBooks} setAllBooks={setAllBooks} />)}
                         </ol>
                     </div>
                 </div>
@@ -31,7 +31,7 @@ const MyReads = ({ allBooks, setAllBooks }) => {
                     <h2 className="bookshelf-title">Want to Read</h2>
                     <div className="bookshelf-books">
                         <ol className="books-grid">
-                            {wanTo.map((b, k) => <ShowBook key={k} b={b} allBooks={allBooks} setAllBooks={setAllBooks} />)}
+                            {wanTo.map((b, k) => <ShowBook key={k} b={b} title={b.title} author={(b.authors) ? b.authors[0] : 'No Author'} imageBG={(b.imageLinks && b.imageLinks.thumbnail) ? b.imageLinks.thumbnail : ''} allBooks={allBooks} setAllBooks={setAllBooks} />)}
                         </ol>
                     </div>
                 </div>
@@ -39,7 +39,7 @@ const MyReads = ({ allBooks, setAllBooks }) => {
                     <h2 className="bookshelf-title">Read</h2>
                     <div className="bookshelf-books">
                         <ol className="books-grid">
-                            {read.map((b, k) => <ShowBook key={k} b={b} allBooks={allBooks} setAllBooks={setAllBooks} />)}
+                            {read.map((b, k) => <ShowBook key={k} b={b} title={b.title} author={(b.authors) ? b.authors[0] : 'No Author'} imageBG={(b.imageLinks && b.imageLinks.thumbnail) ? b.imageLinks.thumbnail : ''} allBooks={allBooks} setAllBooks={setAllBooks} />)}
                         </ol>
                     </div>
                 </div>

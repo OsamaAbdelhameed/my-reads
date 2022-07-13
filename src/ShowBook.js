@@ -1,6 +1,7 @@
+import PropTypes from "prop-types";
 import * as BookAPI from './BooksAPI';
 
-const ShowBook = ({ b, allBooks, setAllBooks }) => {
+const ShowBook = ({ b, title, author, imageBG, allBooks, setAllBooks }) => {
     const onChange = async (e) => {
         if (b.shelf !== e.target.value && e.target.value !== 'none') {
             const res = await BookAPI.update(b, e.target.value);
@@ -18,8 +19,7 @@ const ShowBook = ({ b, allBooks, setAllBooks }) => {
                     style={{
                         width: 128,
                         height: 193,
-                        backgroundImage:
-                            `url(${b.imageLinks.thumbnail ? b.imageLinks.thumbnail : ''})`,
+                        backgroundImage: `url(${imageBG})`,
                     }}
                 ></div>
                 <div className="book-shelf-changer">
@@ -32,14 +32,23 @@ const ShowBook = ({ b, allBooks, setAllBooks }) => {
                         </option>
                         <option value="wantToRead">Want to Read</option>
                         <option value="read">Read</option>
-                        <option value="none" defaultChecked>None</option>
+                        <option value="none" selected>None</option>
                     </select>
                 </div>
             </div>
-            <div className="book-title">{b.title ? b.title : 'No Title'}</div>
-            <div className="book-authors">{b.authors.length >= 1 ? b.authors[0] : 'No author'}</div>
+            <div className="book-title">{title}</div>
+            <div className="book-authors">{author}</div>
         </div>
     </li>
 }
+
+ShowBook.propTypes = {
+    b: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    imageBG: PropTypes.string.isRequired,
+    allBooks: PropTypes.array.isRequired,
+    setAllBooks: PropTypes.func.isRequired,
+};
 
 export default ShowBook;

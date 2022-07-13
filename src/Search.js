@@ -11,28 +11,20 @@ const Search = ({ allBooks, setAllBooks }) => {
     const [searchedBooks, setSearchedBooks] = useState([]);
 
     const onSearch = async (e) => {
-        // setSearchedBooks([]);
+        setSearchedBooks([]);
         console.log(e.target.value);
         if (e.target.value !== '') {
             try {
-                const res = await BookAPI.search(e.target.value.toLowerCase(), 12);
-                if (res.isArray()) {
-                    setSearchedBooks([...allBooks.filter(b => b.title.toLowerCase().includes(e.target.value.toLowerCase()) || b.authors[0].toLowerCase().includes(e.target.value.toLowerCase())), ...res])
-                    console.log(res);
-                    console.log(searchedBooks);
-                } else if (res.error) {
-                    MySwal.fire({
-                        icon: 'error',
-                        title: `${res.error}`,
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-                    console.log(res);
-                }
+                const res = await BookAPI.search(e.target.value, 12);
+                let existed = allBooks.filter(b => b.title.toLowerCase().includes(e.target.value.toLowerCase()));
+                // console.log(res);
+                // console.log(existed);
+                setSearchedBooks([...existed, ...res]);
+                // console.log(searchedBooks);
             } catch (e) {
                 MySwal.fire({
                     icon: 'error',
-                    title: 'Please Type More',
+                    title: `${e}`,
                     showConfirmButton: false,
                     timer: 2000
                 })
@@ -57,7 +49,10 @@ const Search = ({ allBooks, setAllBooks }) => {
             </div>
         </div>
         <div className="search-books-results">
-            <ol className="books-grid">{searchedBooks.length !== 0 ? searchedBooks.map((b, k) => <ShowBook key={k} b={b} allBooks={allBooks} setAllBooks={setAllBooks} searchedBooks={searchedBooks} />) : (<>No Element Exist</>)}</ol>
+            <ol className="books-grid">{(searchedBooks && searchedBooks.length !== 0) ?
+                searchedBooks.map((b, k) =>
+                    <ShowBook key={k} b={b} title={b.title} author={(b.authors) ? b.authors[0] : 'No Author'} imageBG={(b.imageLinks && b.imageLinks.thumbnail) ? b.imageLinks.thumbnail : ''} allBooks={allBooks} setAllBooks={setAllBooks} searchedBooks={searchedBooks} />)
+                : (<>No Element Exist</>)}</ol>
         </div>
     </div>
 }
