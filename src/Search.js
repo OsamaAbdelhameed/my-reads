@@ -12,7 +12,7 @@ const Search = ({ allBooks, setAllBooks }) => {
 
     const onSearch = async (e) => {
         setSearchedBooks([]);
-        console.log(e.target.value);
+        // console.log(e.target.value);
         if (e.target.value !== '') {
             try {
                 const res = await BookAPI.search(e.target.value, 12);

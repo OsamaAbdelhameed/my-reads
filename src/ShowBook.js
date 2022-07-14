@@ -1,3 +1,4 @@
+// import { BiCheck } from "react-icons/bi";
 import PropTypes from "prop-types";
 import * as BookAPI from './BooksAPI';
 
@@ -23,7 +24,7 @@ const ShowBook = ({ b, title, author, imageBG, allBooks, setAllBooks }) => {
                     }}
                 ></div>
                 <div className="book-shelf-changer">
-                    <select onClick={onChange}>
+                    <select onClick={onChange} defaultValue={b.shelf ? b.shelf : 'none'}>
                         <option value="none" disabled>
                             Move to...
                         </option>
@@ -32,7 +33,7 @@ const ShowBook = ({ b, title, author, imageBG, allBooks, setAllBooks }) => {
                         </option>
                         <option value="wantToRead">Want to Read</option>
                         <option value="read">Read</option>
-                        <option value="none" selected>None</option>
+                        <option value="none">None</option>
                     </select>
                 </div>
             </div>
