@@ -19,7 +19,12 @@ const Search = ({ allBooks, setAllBooks }) => {
                 let existed = allBooks.filter(b => b.title.toLowerCase().includes(e.target.value.toLowerCase()));
                 // console.log(res);
                 // console.log(existed);
-                setSearchedBooks([...existed, ...res]);
+                let results = [...existed, ...res.filter((b) => {
+                    let exist = false;
+                    existed.forEach(book => { if (book.id === b.id) exist = true });
+                    return !exist;
+                })];
+                setSearchedBooks(results);
                 // console.log(searchedBooks);
             } catch (e) {
                 MySwal.fire({
